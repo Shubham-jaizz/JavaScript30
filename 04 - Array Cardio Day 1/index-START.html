@@ -38,29 +38,76 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+      const inventors1 = inventors.filter((x)=>{
+          return (x.year>1499 && x.year<1600);
+      })
+      console.log(inventors1);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const inventors2 = inventors.map((x)=>{
+      return [x.first, x.last];
+    })
+    console.log(inventors2);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const ordered = inventors.sort(function(a, b) {
+      if(a.year > b.year) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+    console.log(ordered);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
-
+    const ans = inventors.reduce((acc,x)=>{
+        return (acc + (x.passed-x.year));
+    },0)
+    console.log(ans);
     // 5. Sort the inventors by years lived
+    const ordered2 = inventors.sort(function(a, b) {
+      let alive = a.passed-a.year;
+      let blive = b.passed-b.year;
+
+      if(alive > blive) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+    console.table(ordered2);
+
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
 
+
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const alpha = people.sort((lastOne, nextOne) => {
+      const [aLast, aFirst] = lastOne.split(', ');
+      const [bLast, bFirst] = nextOne.split(', ');
+      return aLast > bLast ? 1 : -1;
+    });
+    console.log(alpha);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
+    const ans2 = data.reduce((data,item)=>{
+        if(!data[item]){
+          data[item] = 0;
+        }
+         data[item]++;
+         return data;
+    },{})
+
+    console.log(ans2);
   </script>
 </body>
 </html>
